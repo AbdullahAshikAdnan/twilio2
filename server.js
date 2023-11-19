@@ -41,6 +41,7 @@ app.post("/jotform-submission", upload.single("input_8"), async (req, res) => {
     statusCallback: "https://your-callback-url.com",
     statusCallbackEvent: ["completed", "answered", "failed"],
     mediaUrl: [voicemailUrl],
+    startTime: scheduledDateTime.toISOString(),
   };
 
   const quantity1RVMCalls = parseInt(req.body["input_17_1000"]);
