@@ -18,7 +18,6 @@ app.get("/", (req, res) => {
   res.send("Welcome to the voicemail delivery service!");
 });
 
-
 // Define route for JotForm form submission
 app.post("/jotform-submission", upload.single("input_8"), async (req, res) => {
   // Check if the file was received
