@@ -14,6 +14,11 @@ const twilioAuthToken = "ef979d9bcc3fbc5833a8e94a1838af07";
 const twilioPhoneNumber = "+18444598674";
 const twilioClient = require("twilio")(twilioAccountSid, twilioAuthToken);
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the voicemail delivery service!");
+});
+
+
 // Define route for JotForm form submission
 app.post("/jotform-submission", upload.single("input_8"), async (req, res) => {
   // Check if the file was received
