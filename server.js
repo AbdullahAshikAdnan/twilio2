@@ -38,7 +38,7 @@ app.post("/jotform-submission", upload.single("input_8"), async (req, res) => {
     from: twilioPhoneNumber,
     to: `+1${areaCode}${phoneNumber}`,
     method: "GET",
-    statusCallback: "https://your-callback-url.com",
+    statusCallback: "https://twilio2-ydey.onrender.com/twilio-callback",
     statusCallbackEvent: ["completed", "answered", "failed"],
     mediaUrl: [voicemailUrl],
     startTime: scheduledDateTime.toISOString(),
