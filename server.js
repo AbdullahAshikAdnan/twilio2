@@ -14,6 +14,25 @@ const twilioAuthToken = "ef979d9bcc3fbc5833a8e94a1838af07";
 const twilioPhoneNumber = "+18444598674";
 const twilioClient = require("twilio")(twilioAccountSid, twilioAuthToken);
 
+// Define a route to handle Twilio status callbacks
+app.post("/twilio-callback", (req, res) => {
+  const callSid = req.body.CallSid;
+  const callStatus = req.body.CallStatus;
+  console.log(`Call SID: ${callSid}, Call Status: ${callStatus}`);
+  res.sendStatus(200);
+});
+
+// Define route to play voicemail
+app.get("/play-voicemail", (req, res) => {
+  const voicemailFilePath = req.query.file;
+  if (fs.existsSync(voicemailFilePath)) {
+    res.set("Content-Type", "audio/mpeg");
+    res.sendFile(voicemailFilePath);
+  } else {
+    res.status(404).send("Voicemail not found");
+  }
+});
+
 app.get("/", (req, res) => {
   res.send("Welcome to the voicemail delivery service!");
 });
@@ -49,7 +68,15 @@ app.post("/jotform-submission", upload.single("input_8"), async (req, res) => {
   };
 
   const quantity1RVMCalls = parseInt(req.body["input_17_1000"]);
+  const quantity5RVMCalls = parseInt(req.body["input_17_1001"]);
+  const quantity10RVMCalls = parseInt(req.body["input_17_1002"]);
+  const quantity20RVMCalls = parseInt(req.body["input_17_1003"]);
+  const quantity25RVMCalls = parseInt(req.body["input_17_1004"]);
   await sendRVM(payload, quantity1RVMCalls);
+  await sendRVM(payload, quantity5RVMCalls);
+  await sendRVM(payload, quantity10RVMCalls);
+  await sendRVM(payload, quantity20RVMCalls);
+  await sendRVM(payload, quantity25RVMCalls);
 
   // Handle other quantities if needed
 
