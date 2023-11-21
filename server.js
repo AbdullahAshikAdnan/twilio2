@@ -93,7 +93,7 @@ app.post("/jotform-submission", upload.single("input_8"), async (req, res) => {
 async function sendRVM(payload, quantity) {
   for (let i = 0; i < quantity; i++) {
     try {
-      const response = await twilioClient.calls.create(payload);
+      const response = await twilioClient.messages.create(payload);
       console.log("RVM scheduled successfully:", response.sid);
     } catch (error) {
       console.error("Failed to schedule RVM:", error);
